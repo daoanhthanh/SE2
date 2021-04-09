@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import vn.daoanhthanh.SE2_Hospital.common.Gender;
+
 @Entity
 @Table(name = "patients")
 public class Patient {
@@ -20,18 +22,21 @@ public class Patient {
     @Size(max = 100)
     private String name;
 
+    @Column(name = "gender")
+    @NotNull
+    private Gender gender;
+
     @Column(name = "dob")
     private LocalDate dob;
-
-    @Column(name = "address")
-    @NotNull
-    private String address;
 
     @Column(name = "phone")
     @NotNull
     private String phoneNumber;
 
-    
+    @Column(name = "address")
+    @NotNull
+    private String address;
+
     @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private PatientDetails patientDetails;
@@ -40,27 +45,26 @@ public class Patient {
     public Patient() {
     }
 
-
-    public Patient(@NotNull @Size(max = 100) String name, LocalDate dob, @NotNull String address,
-            @NotNull String phoneNumber, PatientDetails patientDetails) {
+    public Patient(@NotNull @Size(max = 100) String name, @NotNull Gender gender, LocalDate dob,
+            @NotNull String phoneNumber, @NotNull String address, PatientDetails patientDetails) {
         this.name = name;
+        this.gender = gender;
         this.dob = dob;
-        this.address = address;
         this.phoneNumber = phoneNumber;
+        this.address = address;
         this.patientDetails = patientDetails;
     }
 
-
-    public Patient(long id, @NotNull @Size(max = 100) String name, LocalDate dob, @NotNull String address,
-            @NotNull String phoneNumber, PatientDetails patientDetails) {
+    public Patient(long id, @NotNull @Size(max = 100) String name, @NotNull Gender gender, LocalDate dob,
+            @NotNull String phoneNumber, @NotNull String address, PatientDetails patientDetails) {
         this.id = id;
         this.name = name;
+        this.gender = gender;
         this.dob = dob;
-        this.address = address;
         this.phoneNumber = phoneNumber;
+        this.address = address;
         this.patientDetails = patientDetails;
     }
-
 
     public long getId() {
         return id;
@@ -89,6 +93,16 @@ public class Patient {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
+    }
+
+
+    public Gender getGender() {
+        return gender;
+    }
+
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
 
@@ -121,13 +135,11 @@ public class Patient {
         this.patientDetails = patientDetails;
     }
 
-
     @Override
     public String toString() {
-        return "Patient [address=" + address + ", dob=" + dob + ", id=" + id + ", name=" + name + ", patientDetails="
-                + patientDetails + ", phoneNumber=" + phoneNumber + "]";
+        return "Patient [address=" + address + ", dob=" + dob + ", gender=" + gender + ", id=" + id + ", name=" + name
+                + ", patientDetails=" + patientDetails + ", phoneNumber=" + phoneNumber + "]";
     }
-
 
     @Override
     public int hashCode() {
@@ -135,13 +147,13 @@ public class Patient {
         int result = 1;
         result = prime * result + ((address == null) ? 0 : address.hashCode());
         result = prime * result + ((dob == null) ? 0 : dob.hashCode());
+        result = prime * result + ((gender == null) ? 0 : gender.hashCode());
         result = prime * result + (int) (id ^ (id >>> 32));
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((patientDetails == null) ? 0 : patientDetails.hashCode());
         result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
         return result;
     }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -162,6 +174,8 @@ public class Patient {
                 return false;
         } else if (!dob.equals(other.dob))
             return false;
+        if (gender != other.gender)
+            return false;
         if (id != other.id)
             return false;
         if (name == null) {
@@ -181,11 +195,6 @@ public class Patient {
             return false;
         return true;
     }
-
-    
-
-    
-    
 }
 
 
