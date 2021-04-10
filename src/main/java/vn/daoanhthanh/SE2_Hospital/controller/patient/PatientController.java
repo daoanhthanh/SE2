@@ -1,8 +1,8 @@
-package vn.daoanhthanh.SE2_Hospital.controller;
+package vn.daoanhthanh.SE2_Hospital.controller.patient;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import vn.daoanhthanh.SE2_Hospital.Repository.PatientRepository;
+import vn.daoanhthanh.SE2_Hospital.Repository.patient.PatientRepository;
 import vn.daoanhthanh.SE2_Hospital.error.Patient.PatientNotFoundException;
 import vn.daoanhthanh.SE2_Hospital.model.patient.Patient;
 
@@ -60,7 +60,6 @@ class PatientController {
         Patient.setDob(newPatient.getDob());
         Patient.setAddress(newPatient.getAddress());
         Patient.setPhoneNumber(newPatient.getPhoneNumber());
-        Patient.setPatientDetails(newPatient.getPatientDetails());
         return repository.save(Patient);
       })
       .orElseGet(() -> {

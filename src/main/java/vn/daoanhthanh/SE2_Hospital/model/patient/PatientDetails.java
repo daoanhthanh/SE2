@@ -16,10 +16,10 @@ public class PatientDetails {
     private String bloodtype;
 
     @Column(name = "height")
-    private byte heigth;
+    private int heigth;
 
     @Column(name = "weight")
-    private byte weigth;
+    private int weigth;
 
     @OneToOne
     @MapsId
@@ -29,7 +29,7 @@ public class PatientDetails {
     public PatientDetails() {
     }
 
-    public PatientDetails(long id, String bloodtype, byte heigth, byte weigth, Patient patient) {
+    public PatientDetails(long id, String bloodtype, int heigth, int weigth, Patient patient) {
         this.id = id;
         this.bloodtype = bloodtype;
         this.heigth = heigth;
@@ -37,7 +37,7 @@ public class PatientDetails {
         this.patient = patient;
     }
 
-    public PatientDetails(String bloodtype, byte heigth, byte weigth, Patient patient) {
+    public PatientDetails(String bloodtype, int heigth, int weigth, Patient patient) {
         this.bloodtype = bloodtype;
         this.heigth = heigth;
         this.weigth = weigth;
@@ -60,19 +60,19 @@ public class PatientDetails {
         this.bloodtype = bloodtype;
     }
 
-    public byte getHeigth() {
+    public int getHeigth() {
         return heigth;
     }
 
-    public void setHeigth(byte heigth) {
+    public void setHeigth(int heigth) {
         this.heigth = heigth;
     }
 
-    public byte getWeigth() {
+    public int getWeigth() {
         return weigth;
     }
 
-    public void setWeigth(byte weigth) {
+    public void setWeigth(int weigth) {
         this.weigth = weigth;
     }
 

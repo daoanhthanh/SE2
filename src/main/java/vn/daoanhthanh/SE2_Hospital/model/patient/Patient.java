@@ -37,11 +37,6 @@ public class Patient {
     @NotNull
     private String address;
 
-    @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private PatientDetails patientDetails;
-
-
     public Patient() {
     }
 
@@ -52,7 +47,7 @@ public class Patient {
         this.dob = dob;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.patientDetails = patientDetails;
+        
     }
 
     public Patient(long id, @NotNull @Size(max = 100) String name, @NotNull Gender gender, LocalDate dob,
@@ -63,7 +58,6 @@ public class Patient {
         this.dob = dob;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.patientDetails = patientDetails;
     }
 
     public long getId() {
@@ -126,19 +120,12 @@ public class Patient {
     }
 
 
-    public PatientDetails getPatientDetails() {
-        return patientDetails;
-    }
-
-
-    public void setPatientDetails(PatientDetails patientDetails) {
-        this.patientDetails = patientDetails;
-    }
+   
 
     @Override
     public String toString() {
         return "Patient [address=" + address + ", dob=" + dob + ", gender=" + gender + ", id=" + id + ", name=" + name
-                + ", patientDetails=" + patientDetails + ", phoneNumber=" + phoneNumber + "]";
+                + ", patientDetails="  + ", phoneNumber=" + phoneNumber + "]";
     }
 
     @Override
@@ -150,7 +137,6 @@ public class Patient {
         result = prime * result + ((gender == null) ? 0 : gender.hashCode());
         result = prime * result + (int) (id ^ (id >>> 32));
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((patientDetails == null) ? 0 : patientDetails.hashCode());
         result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
         return result;
     }
@@ -182,11 +168,6 @@ public class Patient {
             if (other.name != null)
                 return false;
         } else if (!name.equals(other.name))
-            return false;
-        if (patientDetails == null) {
-            if (other.patientDetails != null)
-                return false;
-        } else if (!patientDetails.equals(other.patientDetails))
             return false;
         if (phoneNumber == null) {
             if (other.phoneNumber != null)
